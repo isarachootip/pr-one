@@ -1,30 +1,44 @@
-# PR One — company website (Next.js)
+# PR One — company website + event backend (Next.js)
 
-Built from the **PR One Website Redesign** design (dark "tech event" look, lime accent).
+Dark "tech event" redesign of pr-one.com with a real backend for events and registrations.
 
 ## What's inside
-- **Home page**: hero in 6 languages (EN / ไทย / 中文 / VI / DE / عربي), next-event card with live countdown, stats, trusted-by, upcoming events with type filter, 2020–2026 roadmap by year, services and industries, clients, LINE and social links, newsletter, contacts and a "request a proposal" form.
-- **Event registration**: `/events/<slug>` with a form (PDPA consent) → saved to `data/registrations.json`.
-- **Proposal requests** (`/api/contact`) and **newsletter** (`/api/subscribe`) → saved as JSON.
-- **Admin**: `/admin` (basic auth) shows all submissions with CSV download (opens in Excel with Thai text).
 
-## Images
-All photos, team portraits and client logos live in `public/img` (copied from pr-one.com and resized to WebP, 2.7 MB total). Replace a file with the same name to update it.
+**Public site — 6 languages** (`/th`, `/en`, `/zh`, `/vi`, `/de`, `/ar`)
+- Every visitor-facing string is translated (`src/i18n/dictionaries/*.ts`). Arabic is laid out right-to-left.
+- `/` sends visitors to their browser language (Thai by default) and remembers the last language they picked.
+- **Landing page** features the latest event: the featured or next upcoming event with a live countdown and "Reserve my seat", or — when nothing is scheduled — the most recent past event with its photo.
+- Upcoming events with type filter, `/[lang]/events` (upcoming + past), `/[lang]/events/<slug>` detail page with registration form (PDPA consent, duplicate check, seat limit).
+- Roadmap of past events by year, services, 66 client logos, team, LINE / socials, newsletter, proposal request form.
 
-## Edit content
-All text, events, roadmap, clients and contacts live in **`src/data/site.ts`**.
-Anything in `[brackets]` is a placeholder to fill in. Set `startsAt` on an event
-(e.g. `"2026-11-20T09:00:00+07:00"`) to start the countdown and the "+ Calendar" button.
+**Admin — `/admin`** (login with `ADMIN_USER` / `ADMIN_PASSWORD`)
+- Dashboard: upcoming events, registration counts, new proposal requests, subscribers.
+- Events: create / edit / delete, title + summary + venue + audience + description **per language** (empty languages fall back to English), date & time (Bangkok), type, format, client, seat limit, registration open/closed, draft/published, "feature on home page", cover photo upload.
+- Registrations per event, proposal requests inbox (mark handled), subscribers — all downloadable as CSV (opens in Excel with Thai text).
+
+**Data** — SQLite file in `DATA_DIR` (`pr-one.sqlite`) plus uploaded covers in `DATA_DIR/uploads`. On first start it is filled with the 25 past events from pr-one.com.
 
 ## Run locally
 ```bash
 npm install
 cp .env.example .env.local   # set ADMIN_PASSWORD
-npm run dev                  # http://localhost:3000
+npm run dev                  # http://localhost:3000  → admin at /admin
 ```
+Requires Node 22.13+ (uses the built-in `node:sqlite`, no database server needed).
 
 ## Deploy on Coolify
-1. Push this folder to Git and create a new Coolify app from the repo.
-2. Build pack: **Dockerfile** (included). Port **3000**.
-3. Environment variables: `ADMIN_USER`, `ADMIN_PASSWORD`, `DATA_DIR=/app/data`.
-4. Add a **persistent storage** volume mounted at `/app/data` so submissions survive redeploys.
+1. New application from this GitHub repo, build pack **Dockerfile**, port **3000**.
+2. Environment variables: `ADMIN_USER`, `ADMIN_PASSWORD`, `ADMIN_SECRET` (long random string), `SITE_URL` (your domain).
+3. **Persistent storage**: mount a volume at `/app/data` — it holds the database and uploaded photos. Without it, every redeploy wipes events and registrations.
+4. Deploy, open `/admin`, log in and create your first upcoming event.
+
+Back up `/app/data/pr-one.sqlite` regularly (it is one file).
+
+## Where to edit
+| What | File |
+|---|---|
+| Website text in each language | `src/i18n/dictionaries/<lang>.ts` |
+| Team, client logos, contacts, address, socials / LINE ID | `src/data/site.ts` |
+| Events | `/admin` (no code needed) |
+| Images (work photos, team, logos) | `public/img` |
+| Colors and fonts | `src/app/globals.css` |

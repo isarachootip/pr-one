@@ -42,3 +42,6 @@
   border-radius: 12px; padding: 14px 16px; color: var(--color-fg); font-size: 16px; font-family: inherit;
 }
 .field:focus { outline: 2px solid var(--color-accent); outline-offset: 1px; }
+
+/* Arabic letters join; letter-spacing breaks them apart. */
+[dir="rtl"] * { letter-spacing: 0 !important; }
