@@ -143,58 +143,77 @@ export const upcomingEvents: UpcomingEvent[] = [
 /** The event featured in the hero card (first one by default). */
 export const featuredEvent = upcomingEvents[1];
 
-export type RoadmapItem = { client: string; title: string; type: string };
+/** Images are served from the current pr-one.com site. To self-host, copy the
+ *  `assets/img` folder into `public/img` and set NEXT_PUBLIC_ASSET_BASE=/img */
+export const ASSET_BASE = (process.env.NEXT_PUBLIC_ASSET_BASE || "https://www.pr-one.com/assets/img").replace(/\/$/, "");
+export const asset = (path: string) => encodeURI(`${ASSET_BASE}/${path}`);
+
+export type RoadmapItem = { client: string; title: string; type: string; image?: string };
+
+const ev = "port/Event/";
+const pr = "port/PR/";
 
 export const roadmap: { year: string; theme: string; items: RoadmapItem[] }[] = [
   {
     year: "2020–23",
     theme: "Brand launches & press",
     items: [
-      { client: "Ying Charoen Market", title: "Kid Jak Khlong volunteer day 2023", type: "PR" },
-      { client: "Ying Charoen Market", title: "Joins forces with depa 2022", type: "PR" },
-      { client: "Miss Grand", title: "Miss Grand Mae Hong Son 2022", type: "PR" },
-      { client: "Breastfeeding Society", title: "Uniting for a Sustainable Breastfeeding Society 2022", type: "SEMINAR" },
-      { client: "TIPCO", title: "TIPCO NEXT Meet The Press 2021", type: "PR" },
-      { client: "UOB & The FinLab", title: "15 Thai SMEs transform digitally 2020", type: "PR" },
-      { client: "Kidney Project", title: "Kidney Transplantation Project in Celebration 2020", type: "PR" },
-      { client: "Mr. Pizza", title: "Grand Opening Event 2020", type: "LAUNCH" },
+      { client: "Ying Charoen Market", title: "Kid Jak Khlong volunteer day 2023", type: "PR", image: pr + "Ying Charoen Market Joins Volunteer for the _Kid Jak Khlong_ 2023/photo_7.jpg" },
+      { client: "Ying Charoen Market", title: "Joins forces with depa 2022", type: "PR", image: pr + "Ying Charoen Market Joins Forces with depa 2022/DSC04038.jpg" },
+      { client: "Miss Grand", title: "Miss Grand Mae Hong Son 2022", type: "PR", image: pr + "Miss Grand Mae Hong Son 2022/1645413065820.jpg" },
+      { client: "Breastfeeding Society", title: "Uniting for a Sustainable Breastfeeding Society 2022", type: "SEMINAR", image: pr + "Uniting for a Sustainable Breastfeeding Society Seminar_2022/photo.jpg" },
+      { client: "TIPCO", title: "TIPCO NEXT Meet The Press 2021", type: "PR", image: ev + "TIPCO NEXT Meet The Press 2021/TIPCOKK-190.jpg" },
+      { client: "UOB & The FinLab", title: "15 Thai SMEs transform digitally 2020", type: "PR", image: pr + "UOB and The FinLab help 15 Thai SMEs transform digitally_2020/Photo2.jpg" },
+      { client: "Kidney Project", title: "Kidney Transplantation Project in Celebration 2020", type: "PR", image: pr + "Kidney Transplantation Project in Celebration_2020/BBF_4448.JPG" },
+      { client: "Mr. Pizza", title: "Grand Opening Event 2020", type: "LAUNCH", image: pr + "Mr. Pizza Grand Opening Event 2020/photo_5.jpg" },
     ],
   },
   {
     year: "2024",
     theme: "Causes & community",
     items: [
-      { client: "World Organ Donation Day", title: "Give LIFE Get LIVES 2024", type: "PR" },
-      { client: "Run with Wings", title: "Run with Wings Charity Run 2024", type: "PR" },
+      { client: "World Organ Donation Day", title: "Give LIFE Get LIVES 2024", type: "PR", image: pr + "World Organ Donation Day 2024 “Give LIFE Get LIVES ”/photo_6.jpg" },
+      { client: "Run with Wings", title: "Run with Wings Charity Run 2024", type: "PR", image: pr + "Run with Wings Charity Run 2024/photo_6.JPG" },
     ],
   },
   {
     year: "2025",
     theme: "APAC kick-offs & data events",
     items: [
-      { client: "Tricentis", title: "Partner Kick Off APAC 2025", type: "KICK-OFF" },
-      { client: "Infor", title: "APJ Sales Kick Off 2025", type: "KICK-OFF" },
-      { client: "NTT DATA", title: "Transformation NOW! Thailand 2025", type: "SUMMIT" },
-      { client: "Snowflake", title: "Data & AI Innovation Day Bangkok 2025", type: "SUMMIT" },
-      { client: "Cohesity", title: "Catalyst on the Road — Resilience Everywhere 2025", type: "ROADSHOW" },
+      { client: "Tricentis", title: "Partner Kick Off APAC 2025", type: "KICK-OFF", image: ev + "Tricentis Partner Kick Off_APAC _2025/21Feb2025-0075.jpg" },
+      { client: "Infor", title: "APJ Sales Kick Off 2025", type: "KICK-OFF", image: ev + "INFOR_APJ Sales Kick Off 2025/NN1_8544.JPG" },
+      { client: "NTT DATA", title: "Transformation NOW! Thailand 2025", type: "SUMMIT", image: ev + "NTT Data Transformation NOW! THAILAND  2025/1AU_5117.jpg" },
+      { client: "Snowflake", title: "Data & AI Innovation Day Bangkok 2025", type: "SUMMIT", image: ev + "Snowflake Data & AI Innovation Day Bangkok 2025/039A0132.jpg" },
+      { client: "Cohesity", title: "Catalyst on the Road — Resilience Everywhere 2025", type: "ROADSHOW", image: ev + "Cohesity  Catalyst1 on the road Resilience Everywhere 2025/039A3287.jpg" },
+      { client: "Catalyst", title: "Catalyst on the Road 2025", type: "ROADSHOW", image: ev + "CATELYST ON THE ROAD_2025/039A9124.jpg" },
       { client: "CyberArk", title: "CyberArk Bangkok 2025", type: "SEMINAR" },
-      { client: "Thailand Trader Fair", title: "Thailand Trader Fair 2025", type: "EXHIBITION" },
+      { client: "Thailand Trader Fair", title: "Thailand Trader Fair 2025", type: "EXHIBITION", image: ev + "Thailand Traders Fair 2025/0016.jpg" },
     ],
   },
   {
     year: "2026",
     theme: "Tech summits at scale",
     items: [
-      { client: "Asia Sourcing Show", title: "Press Conference — Asia Sourcing Show 2026", type: "PR" },
-      { client: "Ping Identity", title: "State of Trust 2026", type: "SEMINAR" },
-      { client: "UiPath", title: "Fusion Summit Bangkok 2026", type: "SUMMIT" },
-      { client: "STT GDC", title: "Practical Insights Bangkok 2026", type: "SEMINAR" },
-      { client: "Cohesity", title: "Resilience Everywhere 2026", type: "SEMINAR" },
-      { client: "Benz BKK", title: "The Endless Appreciation Concert 2026", type: "CUSTOMER EVENT" },
-      { client: "Thailand Trader Fair", title: "Thailand Trader Fair 2026", type: "EXHIBITION" },
+      { client: "Asia Sourcing Show", title: "Press Conference — Asia Sourcing Show 2026", type: "PR", image: pr + "Press Conference_Asia Sourcing Show 2026/Master_Photo_260211-333.JPG" },
+      { client: "Ping Identity", title: "State of Trust 2026", type: "SEMINAR", image: ev + "Ping Identity  State of Trust in 2026/039A4188.jpg" },
+      { client: "UiPath", title: "Fusion Summit Bangkok 2026", type: "SUMMIT", image: ev + "Uipath_Fusion Summit Bangkok 2026/DSC_0452.JPG" },
+      { client: "STT GDC", title: "Practical Insights Bangkok 2026", type: "SEMINAR", image: ev + "STTTelemedia Global Data Center_Bangkok 2026/C1 020726_0366.jpg" },
+      { client: "Cohesity", title: "Resilience Everywhere 2026", type: "SEMINAR", image: ev + "Cohesity_Resilience Buessiness 2026/0135.jpg" },
+      { client: "Benz BKK", title: "The Endless Appreciation Concert 2026", type: "CUSTOMER EVENT", image: ev + "Benz BKK The Endless Appriciation Concert 2026/Jpg-0050.JPG" },
+      { client: "Thailand Trader Fair", title: "Thailand Trader Fair 2026", type: "EXHIBITION", image: ev + "Thailand Trader Fair 2026/039A7913.JPG" },
       { client: "Your brand", title: "[Your next event — Q4 2026 dates open]", type: "OPEN SLOT" },
     ],
   },
+];
+
+export const team = [
+  { name: "Wanya Chareonpo", role: "Managing Director", phone: "+66 81 300 2633", email: "wanya@pr-one.com", photo: "team/wanya600.jpg" },
+  { name: "Patthira Buri", role: "PR Director", phone: "+66 81 636 0452", email: "patthira@pr-one.com", photo: "team/Ann2026-600.jpg" },
+  { name: "Chuenboon Ponglumchiak", role: "Event Director", phone: "+66 61 928 2441", email: "chuenboon@pr-one.com", photo: "team/kaew.jpg" },
+  { name: "Neelawan Satiranon", role: "Event Manager", phone: "+66 81 308 5723", email: "neelawan@pr-one.com", photo: "team/bb.jpg" },
+  { name: "Tanitha Vittayanon", role: "PR Manager", phone: "+66 86 993 5744", email: "tanitha@pr-one.com", photo: "team/tanitha2026.png" },
+  { name: "Pentida Wisessmit", role: "Graphic Design", phone: "+66 92 442 3655", email: "pentida@pr-one.com", photo: "team/Pentida2026600.png" },
+  { name: "Nampetch Thainiyom", role: "Event Assistant", phone: "+66 61 019 9227", email: "nampetch@pr-one.com", photo: "team/Nampetch 600.jpg" },
 ];
 
 export const stats = [
@@ -206,10 +225,11 @@ export const stats = [
 ];
 
 export const services = [
-  { title: "Seminars & Summits", body: "Seminars, summits, product launches, exhibitions and customer events — physical, hybrid or live-streamed." },
-  { title: "Audience & Lead Generation", body: "Targeted IT decision-maker database, email invitations, telemarketing follow-up and daily registration reports." },
-  { title: "PR & Media", body: "Press conferences, media invitations and coverage across Thai tech and business outlets." },
-  { title: "Creative & Content", body: "Key visuals, event microsites, social content, photo and video — designed in-house, revised with you." },
+  { title: "Event Management", body: "Seminars, conferences, exhibitions, product launches, trade shows and roadshows — physical, hybrid or virtual, from planning through post-event evaluation." },
+  { title: "Database & Lead Generation", body: "Data profiling, targeted IT decision-maker lists, email invitation campaigns, telemarketing follow-up and daily registration reports." },
+  { title: "Marketing Campaigns", body: "Campaign strategy, budgeting and scheduling, plus social media and digital platform management." },
+  { title: "Public Relations", body: "PR consultancy, media relationships and message distribution across Thai tech, business and lifestyle outlets." },
+  { title: "Content & Visual Design", body: "In-house copywriting, key visuals, microsites, photo and video — with you involved at every step." },
 ];
 
 export const industries = [

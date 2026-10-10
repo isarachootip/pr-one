@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { roadmap } from "@/data/site";
+import { asset, roadmap } from "@/data/site";
 import { Eyebrow, H2 } from "./ui";
 
 const realCount = (items: { type: string }[]) => items.filter((i) => i.type !== "OPEN SLOT").length;
@@ -81,9 +81,14 @@ export function Roadmap() {
                   href={open ? "/#contact" : (undefined as never)}
                   className={`flex flex-col gap-3 rounded-[14px] bg-ink p-3.5 ${open ? "border border-dashed border-accent" : "border border-line-2"}`}
                 >
-                  <div className="ph flex h-[120px] items-end rounded-[10px] p-2.5">
-                    <span className="font-mono text-[11px] text-dim">[EVENT PHOTO]</span>
-                  </div>
+                  {it.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={asset(it.image)} alt={it.title} loading="lazy" className="h-[160px] w-full rounded-[10px] bg-panel object-cover" />
+                  ) : (
+                    <div className="ph flex h-[160px] items-end rounded-[10px] p-2.5">
+                      <span className="font-mono text-[11px] text-dim">{open ? "YOUR EVENT HERE" : "[EVENT PHOTO]"}</span>
+                    </div>
+                  )}
                   <div className="flex items-center justify-between gap-2">
                     <span className="font-mono text-xs text-muted-2">{it.client.toUpperCase()}</span>
                     <span className={`rounded-[5px] px-2 py-1 font-mono text-[11px] text-ink ${open ? "bg-accent" : "bg-soft"}`}>{it.type}</span>

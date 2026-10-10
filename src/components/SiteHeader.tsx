@@ -9,6 +9,7 @@ const links = [
   ["Roadmap", "/#roadmap"],
   ["Services", "/#services"],
   ["Clients", "/#clients"],
+  ["Team", "/#team"],
   ["Connect", "/#connect"],
   ["Contact", "/#contact"],
 ];

@@ -1,4 +1,4 @@
-import { clients, company, contacts, industries, services, socials, telHref, trustedBy } from "@/data/site";
+import { asset, clients, company, contacts, industries, services, socials, team, telHref, trustedBy } from "@/data/site";
 import { ContactForm } from "./ContactForm";
 import { SubscribeForm } from "./SubscribeForm";
 import { Eyebrow, H2 } from "./ui";
@@ -68,6 +68,31 @@ export function Clients() {
   );
 }
 
+export function Team() {
+  return (
+    <section id="team" className="scroll-mt-24 border-t border-line">
+      <div className="mx-auto max-w-[1280px] px-6 py-24">
+        <Eyebrow>05 — OUR TEAM</Eyebrow>
+        <H2 className="mb-12 max-w-[820px]">The people behind every stage.</H2>
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-5">
+          {team.map((m) => (
+            <article key={m.email} className="overflow-hidden rounded-[18px] border border-line-2 bg-panel">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={asset(m.photo)} alt={m.name} loading="lazy" className="aspect-[4/5] w-full bg-ink-2 object-cover object-top" />
+              <div className="p-5">
+                <div className="text-[17px] font-semibold">{m.name}</div>
+                <div className="mb-3 text-sm text-accent">{m.role}</div>
+                <a href={`mailto:${m.email}`} className="block truncate text-sm text-soft hover:text-white">{m.email}</a>
+                <a href={telHref(m.phone)} className="block text-sm text-muted-2 hover:text-white">{m.phone}</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const icon = {
   people: (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -100,7 +125,7 @@ export function Connect() {
   return (
     <section id="connect" className="scroll-mt-24 border-y border-line bg-ink-2">
       <div className="mx-auto max-w-[1280px] px-6 py-[104px]">
-        <Eyebrow>05 — STAY CONNECTED</Eyebrow>
+        <Eyebrow>06 — STAY CONNECTED</Eyebrow>
         <H2 className="mb-12 max-w-[760px]">Never miss an invitation.</H2>
 
         <div className="flex flex-wrap gap-5">
@@ -151,7 +176,7 @@ export function Contact() {
     <section id="contact" className="mx-auto max-w-[1280px] scroll-mt-24 px-6 pt-[104px] pb-[72px]">
       <div className="flex flex-wrap gap-12">
         <div className="min-w-0 flex-[1_1_420px]">
-          <Eyebrow>06 — PLAN YOUR EVENT</Eyebrow>
+          <Eyebrow>07 — PLAN YOUR EVENT</Eyebrow>
           <h2 className="mb-6 font-display text-[clamp(38px,5vw,72px)] font-bold leading-none tracking-[-0.035em]">
             Have a launch, summit or roadshow coming up?
           </h2>
