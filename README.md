@@ -8,6 +8,9 @@ Built from the **PR One Website Redesign** design (dark "tech event" look, lime 
 - **Proposal requests** (`/api/contact`) and **newsletter** (`/api/subscribe`) → saved as JSON.
 - **Admin**: `/admin` (basic auth) shows all submissions with CSV download (opens in Excel with Thai text).
 
+## Images
+All photos, team portraits and client logos live in `public/img` (copied from pr-one.com and resized to WebP, 2.7 MB total). Replace a file with the same name to update it.
+
 ## Edit content
 All text, events, roadmap, clients and contacts live in **`src/data/site.ts`**.
 Anything in `[brackets]` is a placeholder to fill in. Set `startsAt` on an event
