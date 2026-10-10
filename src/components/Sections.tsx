@@ -54,15 +54,16 @@ export function Clients() {
             <Eyebrow>04 — CLIENTS</Eyebrow>
             <H2 className="max-w-[820px]">Trusted by global tech leaders — and brands across Thailand.</H2>
           </div>
-          <span className="text-[15px] text-dim">[Replace names with client logos]</span>
+          <span className="font-mono text-sm text-dim">{clients.length}+ BRANDS</span>
         </div>
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-3">
+        <ul className="m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-3 p-0">
           {clients.map((c) => (
-            <div key={c} className="flex h-[84px] items-center justify-center rounded-xl border border-line-2 font-display text-[19px] font-semibold text-soft">
-              {c}
-            </div>
+            <li key={c.logo} className="flex h-[92px] items-center justify-center rounded-xl bg-white p-4">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={asset(c.logo)} alt={c.name} loading="lazy" className="max-h-full max-w-full object-contain" />
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );

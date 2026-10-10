@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { LangProvider } from "@/components/LangProvider";
+import { asset, favicon } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "PR One — Event & PR Agency, Bangkok",
   description:
     "PR One plans and runs seminars, summits, launches, exhibitions and PR for brands across Thailand — trusted by the world’s leading IT and software companies since 2004.",
+  icons: { icon: asset(favicon), apple: asset("apple-touch-icon.png") },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
